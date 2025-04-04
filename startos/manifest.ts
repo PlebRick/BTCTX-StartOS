@@ -1,23 +1,23 @@
 import { setupManifest } from '@start9labs/start-sdk'
 
 export const manifest = setupManifest({
-  id: 'hello-world',
-  title: 'Hello World',
+  id: 'bitcointx',
+  title: 'BitcoinTX',
   license: 'mit',
-  wrapperRepo: 'https://github.com/Start9Labs/hello-world-wrapper',
-  upstreamRepo: 'https://github.com/Start9Labs/hello-world',
-  supportSite: 'https://docs.start9.com/',
-  marketingSite: 'https://start9.com/',
-  donationUrl: 'https://donate.start9.com/',
+  wrapperRepo: 'https://github.com/BitcoinTX-org/BTCTX-StartOS.git',
+  upstreamRepo: 'https://github.com/BitcoinTX-org/BTCTX-org.git',
+  supportSite: 'https://github.com/BitcoinTX-org/BTCTX-org.git',
+  marketingSite: 'https://github.com/BitcoinTX-org/BTCTX-org.git',
+  donationUrl: 'https://github.com/BitcoinTX-org/BTCTX-org.git',
   description: {
-    short: 'Bare bones example of a StartOS service',
-    long: 'Hello World is a template service that provides examples of basic StartOS features.',
+    short: 'A self-hosted Bitcoin portfolio tracker with double-entry accounting.',
+    long: 'BitcoinTX is an open-source, local-first solution that tracks Bitcoin transactions using robust double-entry accounting and FIFO cost-basis.Generate IRS-compliant reports (PDF/CSV). Ideal for single-user setups seeking privacy and auditability.',
   },
   volumes: ['main'],
   images: {
-    'hello-world': {
+    'bitcointx': {
       source: {
-        dockerTag: 'start9/hello-world',
+        dockerTag: 'b1ackswan/btctx:latest',
       },
     },
   },
