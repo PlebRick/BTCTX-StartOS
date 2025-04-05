@@ -1,30 +1,26 @@
+// store.ts
 import { setupExposeStore } from '@start9labs/start-sdk'
 
 /**
- * @description The Store is used for persisting arbitrary data that are needed by the wrapper
- *   package but are NOT persisted by the upstream service. Do NOT persist data here that are
- *   already being persisted by the service itself.
+ * @description 
+ * The Store is used for persisting arbitrary data that the *wrapper* package needs,
+ * but which is *not* persisted by the underlying service (BitcoinTX) itself.
  *
- *   Store data should be kept to a minimum. Stateless packages are easier to maintain
- *   and eliminate unexpected behavior.
- * @type {Record<string, any>}
- * @example
- * ```
- * export type Store = {
- *   key1: string
- *   key2: boolean
- *   key3: number
- *   key4: {
- *     key5: string[]
- *   }
- * }
- * ```
+ * You can keep this file minimal or empty if you have no extra data to store.
  */
+
 export type Store = {
-  secretPhrase: string
-  nameLastUpdatedAt: string | null
+  // Example placeholder:
+  // someSetting?: string
 }
 
+/**
+ * "exposedStore" determines which parts of the Store you want to
+ * expose to other services or the UI. If you have no fields,
+ * simply return an empty array.
+ */
 export const exposedStore = setupExposeStore<Store>((pathBuilder) => [
-  pathBuilder.nameLastUpdatedAt,
+  // If in the future you have store fields you want to expose,
+  // place them here, for example:
+  // pathBuilder.someSetting,
 ])
