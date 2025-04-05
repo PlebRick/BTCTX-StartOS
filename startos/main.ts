@@ -3,39 +3,38 @@ import { T } from '@start9labs/start-sdk'
 import { uiPort } from './utils'
 
 export const main = sdk.setupMain(async ({ effects, started }) => {
-  /**
-   * ======================== Setup (optional) ========================
-   *
-   * In this section, we fetch any resources or run any desired preliminary commands.
-   */
-  console.info('Starting BitcoinTX')
+  console.info('Starting BitcoinTX with minimal alpha config...')
 
   /**
-   * ======================== Additional Health Checks (optional) ========================
-   *
-   * In this section, we define *additional* health checks beyond those included with each daemon (below).
+   * Additional health checks beyond the main one.
+   * If not needed, keep empty.
    */
   const additionalChecks: T.HealthCheck[] = []
 
   /**
-   * ======================== Daemons ========================
-   *
-   * In this section, we create one or more daemons that define the service runtime.
-   *
-   * Each daemon defines its own health check, which can optionally be exposed to the user.
+   * We create a single daemon named 'primary' that runs the Docker container.
    */
   return sdk.Daemons.of(effects, started, additionalChecks).addDaemon(
     'primary',
     {
-      subcontainer: { imageId: 'bitcointx' },
+      // subcontainer references the image from manifest.ts -> "bitcointx"
+      subcontainer: {
+        imageId: 'bitcointx',
+      },
+
+      // The command the Docker container runs (Python+FastAPI on port 80)
       command: ['uvicorn', 'backend.main:app', '--host', '0.0.0.0', '--port', '80'],
+
+      // Mount the "main" volume at /data so the DB is stored persistently
       mounts: sdk.Mounts.of().addVolume('main', null, '/data', false),
+
+      // Health check to confirm port 80 is listening
       ready: {
-        display: 'BitcoinTX Interface',
+        display: 'BitcoinTX Web UI',
         fn: () =>
-          sdk.healthCheck.checkPortListening(effects, uiPort, {
-            successMessage: 'BitcoinTX is ready',
-            errorMessage: 'BitcoinTX failed to start on port 80.',
+          sdk.healthCheck.checkPortListening(effects, uiPort || 80, {
+            successMessage: 'BitcoinTX is running on port 80',
+            errorMessage: 'BitcoinTX failed to start on port 80',
           }),
       },
       requires: [],

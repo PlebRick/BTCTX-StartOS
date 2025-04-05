@@ -6,15 +6,16 @@ export const manifest = setupManifest({
   license: 'mit',
   wrapperRepo: 'https://github.com/BitcoinTX-org/BTCTX-StartOS.git',
   upstreamRepo: 'https://github.com/BitcoinTX-org/BTCTX-org.git',
-  supportSite: 'https://github.com/BitcoinTX-org/BTCTX-org.git',
-  marketingSite: 'https://github.com/BitcoinTX-org/BTCTX-org.git',
-  donationUrl: 'https://github.com/BitcoinTX-org/BTCTX-org.git',
+  supportSite: 'https://docs.start9.com/',
+  marketingSite: 'https://start9.com/',
+  donationUrl: 'https://donate.start9.com/',
   description: {
     short: 'A self-hosted Bitcoin portfolio tracker with double-entry accounting.',
-    long: 'BitcoinTX is an open-source, local-first solution that tracks Bitcoin transactions using robust double-entry accounting and FIFO cost-basis.Generate IRS-compliant reports (PDF/CSV). Ideal for single-user setups seeking privacy and auditability.',
+    long: 'BitcoinTX is a local-first solution that tracks Bitcoin transactions using robust double-entry accounting and FIFO cost-basis to generate IRS-compliant reports.',
   },
-  volumes: ['main'],
+  volumes: ['main'], // One persistent volume named "main"
   images: {
+    // Ties to "subcontainer: { imageId: 'bitcointx' }" in main.ts
     'bitcointx': {
       source: {
         dockerTag: 'b1ackswan/btctx:latest',
@@ -23,7 +24,7 @@ export const manifest = setupManifest({
   },
   hardwareRequirements: {},
   alerts: {
-    install: 'Optional alert to display before installing the service',
+    install: null,
     update: null,
     uninstall: null,
     restore: null,

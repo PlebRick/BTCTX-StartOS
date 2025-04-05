@@ -6,21 +6,22 @@ import { versions } from './versions'
 import { actions } from './actions'
 import { yamlFile } from './file-models/config.yml'
 
-// **** Install ****
+/**
+ * A minimal, no-op install function
+ */
 const install = sdk.setupInstall(async ({ effects }) => {
-  // If you have any logic to run on initial install,
-  // such as writing default config files or setting up the store, do it here.
-
-  // Example (commented out if unused):
-  // await yamlFile.write(effects, { someField: "someValue" })
-  // await sdk.store.setOwn(effects, sdk.StorePath.secretPhrase, getSecretPhrase("BitcoinTX"))
+  // Do nothing. No secrets or config.
 })
 
-// **** Uninstall ****
-const uninstall = sdk.setupUninstall(async ({ effects }) => {})
+/**
+ * A minimal, no-op uninstall function
+ */
+const uninstall = sdk.setupUninstall(async ({ effects }) => {
+  // Do nothing
+})
 
 /**
- * Plumbing. DO NOT EDIT.
+ * Standard boilerplate from the hello-world example
  */
 export const { packageInit, packageUninit, containerInit } = sdk.setupInit(
   versions,
@@ -30,4 +31,5 @@ export const { packageInit, packageUninit, containerInit } = sdk.setupInit(
   setDependencies,
   actions,
   exposedStore,
+  // If you previously had a store, remove or pass "undefined" or an
 )
