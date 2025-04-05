@@ -4,20 +4,16 @@ import { setDependencies } from './dependencies'
 import { setInterfaces } from './interfaces'
 import { versions } from './versions'
 import { actions } from './actions'
-import { getSecretPhrase } from './utils'
 import { yamlFile } from './file-models/config.yml'
 
 // **** Install ****
 const install = sdk.setupInstall(async ({ effects }) => {
-  const name = 'World'
+  // If you have any logic to run on initial install,
+  // such as writing default config files or setting up the store, do it here.
 
-  await yamlFile.write(effects, { name })
-
-  await sdk.store.setOwn(
-    effects,
-    sdk.StorePath.secretPhrase,
-    getSecretPhrase(name),
-  )
+  // Example (commented out if unused):
+  // await yamlFile.write(effects, { someField: "someValue" })
+  // await sdk.store.setOwn(effects, sdk.StorePath.secretPhrase, getSecretPhrase("BitcoinTX"))
 })
 
 // **** Uninstall ****
