@@ -8,7 +8,7 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
    *
    * In this section, we fetch any resources or run any desired preliminary commands.
    */
-  console.info('Starting Hello World!')
+  console.info('Starting BitcoinTX')
 
   /**
    * ======================== Additional Health Checks (optional) ========================
@@ -27,15 +27,15 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
   return sdk.Daemons.of(effects, started, additionalChecks).addDaemon(
     'primary',
     {
-      subcontainer: { imageId: 'hello-world' },
-      command: ['hello-world'],
+      subcontainer: { imageId: 'bitcointx' },
+      command: ['uvicorn', 'backend.main:app', '--host', '0.0.0.0', '--port', '80'],
       mounts: sdk.Mounts.of().addVolume('main', null, '/data', false),
       ready: {
-        display: 'Web Interface',
+        display: 'BitcoinTX Interface',
         fn: () =>
           sdk.healthCheck.checkPortListening(effects, uiPort, {
-            successMessage: 'The web interface is ready',
-            errorMessage: 'The web interface is not ready',
+            successMessage: 'BitcoinTX is ready',
+            errorMessage: 'BitcoinTX failed to start on port 80.',
           }),
       },
       requires: [],
