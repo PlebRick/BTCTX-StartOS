@@ -11,7 +11,7 @@ export const webUiInterfaceId = 'webui'
  * This function runs on install, update, and config save.
  */
 export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
-  const uiMulti = sdk.MultiHost.of(effects, 'uiMulti')
+  const uiMulti = sdk.MultiHost.of(effects, 'ui-multi')
   const uiMultiOrigin = await uiMulti.bindPort(uiPort, { protocol: 'http' })
   const ui = sdk.createInterface(effects, {
     name: 'Web UI',
