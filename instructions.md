@@ -1,16 +1,50 @@
+# BitcoinTX Instructions
 
-# BitcoinTX on StartOS
+## Getting Started
 
-BitcoinTX is a self-hosted, single-user Bitcoin portfolio tracker with double-entry accounting and FIFO cost-basis. This package wraps BitcoinTX for easy installation and management on [StartOS](https://docs.start9.com).
+After installation, click the "Launch UI" button to open the BitcoinTX web interface.
 
----
+## Features
 
-## Building from Source
+### Portfolio Tracking
 
-1. **Set up** your environment for [StartOS packaging](https://docs.start9.com/packaging-guide/) — install Docker, Make, Node.js, SquashFS, and the Start CLI.
-2. **Clone** this repository (the StartOS wrapper), then run:
+BitcoinTX tracks your Bitcoin holdings using double-entry accounting principles. Each transaction is recorded with proper debits and credits to maintain an accurate ledger.
 
-   ```bash
-   npm install
-   make
-   ```
+### Adding Transactions
+
+Use the web interface to add:
+
+- Purchases (fiat to Bitcoin)
+- Sales (Bitcoin to fiat)
+- Transfers between wallets
+- Income received in Bitcoin
+- Fees and expenses
+
+### Cost Basis Calculation
+
+BitcoinTX uses FIFO (First In, First Out) accounting to calculate your cost basis. This method assigns the cost of your earliest purchases to your sales first.
+
+### Tax Reports
+
+Generate IRS-compliant tax documents:
+
+- **Form 8949**: Sales and Other Dispositions of Capital Assets
+- **Schedule D**: Capital Gains and Losses
+
+Export reports for your tax year to include with your filing.
+
+## Data Storage
+
+All data is stored locally in a SQLite database. Your financial information never leaves your server.
+
+## Backups
+
+BitcoinTX data is included in StartOS backups. Regular backups are recommended to protect your transaction history.
+
+## Support
+
+For issues with the BitcoinTX application, visit:
+https://github.com/BitcoinTX-org/BTCTX/issues
+
+For issues with the StartOS wrapper, visit:
+https://github.com/BitcoinTX-org/BTCTX-StartOS/issues

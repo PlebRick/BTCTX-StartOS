@@ -1,1 +1,74 @@
 # BitcoinTX for StartOS
+
+This repository contains the StartOS wrapper for [BitcoinTX](https://github.com/BitcoinTX-org/BTCTX), a self-hosted Bitcoin portfolio tracker with double-entry accounting and FIFO cost-basis tax reporting.
+
+## Requirements
+
+- StartOS 0.4.0 or later
+- ARM64 (aarch64) architecture
+
+## Building from Source
+
+### Prerequisites
+
+- [start-cli](https://github.com/Start9Labs/start-os) 0.4.0+
+- Node.js 18+
+- Docker
+
+Install start-cli:
+
+```bash
+curl -sSL https://start9labs.github.io/start-cli | sh
+```
+
+### Build
+
+```bash
+git clone https://github.com/PlebRick/BTCTX-StartOS.git
+cd BTCTX-StartOS
+make
+```
+
+This produces `btctx.s9pk`, which can be sideloaded to StartOS.
+
+### Development Commands
+
+```bash
+make              # Build the s9pk package
+make clean        # Remove build artifacts
+npm run check     # Run TypeScript type checking
+npm run prettier  # Format code
+```
+
+## Installation
+
+1. Build the package or obtain `btctx.s9pk`
+2. In StartOS, navigate to System > Sideload
+3. Upload `btctx.s9pk`
+4. Follow the installation prompts
+
+## Features
+
+- Web-based portfolio tracking interface
+- Double-entry accounting for Bitcoin transactions
+- FIFO cost-basis calculation
+- IRS-compliant tax report generation (Form 8949, Schedule D)
+- Local SQLite database with automatic backup support
+
+## Architecture
+
+The wrapper runs BitcoinTX as a single daemon:
+
+- **Web UI**: FastAPI backend serving React frontend on port 80
+- **Data**: SQLite database persisted in `/data` volume
+- **Backups**: Full volume backup of all application data
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## Links
+
+- [BitcoinTX Repository](https://github.com/BitcoinTX-org/BTCTX)
+- [StartOS Documentation](https://docs.start9.com)
+- [Start9 Labs](https://start9.com)
