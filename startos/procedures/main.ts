@@ -32,6 +32,9 @@ export const main = sdk.setupMain(async ({ effects }) => {
     subcontainer,
     exec: {
       command: ['uvicorn', 'backend.main:app', '--host', '0.0.0.0', '--port', '80'],
+      env: {
+        DATABASE_FILE: '/data/bitcoin_tracker.db',
+      },
     },
     ready: {
       display: 'Web Interface',
