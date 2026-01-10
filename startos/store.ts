@@ -1,13 +1,9 @@
-import { setupExposeStore } from '@start9labs/start-sdk'
-
 /**
- * The Store is a simple object. We'll store "secretKey" for persistence.
+ * The Store is for persisting data that are needed by the package but are NOT persisted by the upstream service.
+ * Do NOT persist data here that are already being persisted by the service itself.
+ *
+ * Store data should be kept to a minimum. Stateless packages are easier to maintain and eliminate unexpected behavior.
+ *
+ * For BitcoinTX, the SQLite database is already persisted in /data, so we only need minimal store data.
  */
-export type Store = {
-  secretKey?: string
-}
-
-export const exposedStore = setupExposeStore<Store>((pathBuilder) => [
-  // If you wanted to expose something to the UI, you can list it here.
-  // For now, we won't expose "secretKey".
-])
+export type Store = {}

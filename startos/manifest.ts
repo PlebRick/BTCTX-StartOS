@@ -1,28 +1,30 @@
 import { setupManifest } from '@start9labs/start-sdk'
 
+/**
+ * Here we define static properties of the package to be displayed in the Marketplace and used by StartOS.
+ */
 export const manifest = setupManifest({
-  id: 'bitcointx',
+  id: 'btctx',
   title: 'BitcoinTX',
   license: 'mit',
-  wrapperRepo: 'https://github.com/BitcoinTX-org/BTCTX-StartOS.git',
-  upstreamRepo: 'https://github.com/BitcoinTX-org/BTCTX-org.git',
-  supportSite: 'https://docs.start9.com/',
-  marketingSite: 'https://start9.com/',
-  donationUrl: 'https://donate.start9.com/',
+  wrapperRepo: 'https://github.com/BitcoinTX-org/BTCTX-StartOS',
+  upstreamRepo: 'https://github.com/BitcoinTX-org/BTCTX',
+  supportSite: 'https://github.com/BitcoinTX-org/BTCTX/issues',
+  marketingSite: 'https://github.com/BitcoinTX-org/BTCTX',
+  donationUrl: null,
+  docsUrl: 'https://github.com/BitcoinTX-org/BTCTX#readme',
   description: {
-    short: 'A self-hosted Bitcoin portfolio tracker with double-entry accounting.',
-    long: 'BitcoinTX is a local-first solution that tracks Bitcoin transactions using robust double-entry accounting and FIFO cost-basis to generate IRS-compliant reports.',
+    short: 'Self-hosted Bitcoin portfolio tracker with tax reporting',
+    long: 'BitcoinTX is a local-first solution that tracks Bitcoin transactions using robust double-entry accounting and FIFO cost-basis to generate IRS-compliant tax reports including Form 8949 and Schedule D.',
   },
-  volumes: ['main'], // One persistent volume named "main"
+  volumes: ['main'],
   images: {
-    // Ties to "subcontainer: { imageId: 'bitcointx' }" in main.ts
-    'bitcointx': {
+    main: {
       source: {
         dockerTag: 'b1ackswan/btctx:latest',
       },
     },
   },
-  hardwareRequirements: {},
   alerts: {
     install: null,
     update: null,
