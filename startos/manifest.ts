@@ -6,6 +6,11 @@ import { setupManifest } from '@start9labs/start-sdk'
 export const manifest = setupManifest({
   id: 'btctx',
   title: 'BitcoinTX',
+  version: '0.1.0:0',
+  satisfies: [],
+  canMigrateTo: '>=0.1.0:0',
+  canMigrateFrom: '>=0.1.0:0',
+  releaseNotes: 'Initial alpha release of BitcoinTX for StartOS',
   license: 'mit',
   wrapperRepo: 'https://github.com/BitcoinTX-org/BTCTX-StartOS',
   upstreamRepo: 'https://github.com/BitcoinTX-org/BTCTX',
@@ -23,6 +28,7 @@ export const manifest = setupManifest({
       source: {
         dockerTag: 'b1ackswan/btctx:latest',
       },
+      arch: ['aarch64'],
     },
   },
   alerts: {
@@ -34,4 +40,7 @@ export const manifest = setupManifest({
     stop: null,
   },
   dependencies: {},
+  hardwareRequirements: {
+    arch: ['aarch64'],
+  },
 })
