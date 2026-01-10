@@ -4,6 +4,13 @@
 
 After installation, click the "Launch UI" button to open the BitcoinTX web interface.
 
+## Default Login
+
+- **Username:** `admin`
+- **Password:** `password`
+
+**Important:** Change your password after your first login for security.
+
 ## Features
 
 ### Portfolio Tracking

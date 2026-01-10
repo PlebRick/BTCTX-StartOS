@@ -1,8 +1,7 @@
 import { sdk } from '../../sdk'
+import { showDefaultCredentials } from './showDefaultCredentials'
 
 /**
  * Here we list every Action.
- *
- * BitcoinTX doesn't have custom actions - all functionality is in the web UI.
  */
-export const actions = sdk.Actions.of()
+export const actions = sdk.Actions.of().addAction(showDefaultCredentials)

@@ -32,7 +32,8 @@ export const manifest = setupManifest({
     },
   },
   alerts: {
-    install: null,
+    install:
+      'Default login credentials: Username "admin", Password "password". Please change your password after first login.',
     update: null,
     uninstall: null,
     restore: null,
