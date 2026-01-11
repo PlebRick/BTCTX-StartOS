@@ -41,7 +41,7 @@ import sqlite3
 
 default_hash = bcrypt.hashpw(b"password", bcrypt.gensalt()).decode("utf-8")
 
-conn = sqlite3.connect("/data/bitcoin_tracker.db")
+conn = sqlite3.connect("/data/btctx.db")
 cursor = conn.cursor()
 cursor.execute("UPDATE users SET username = 'admin', password_hash = ? WHERE id = 1", (default_hash,))
 conn.commit()
