@@ -12,7 +12,7 @@ export const manifest = setupManifest({
   canMigrateFrom: '>=0.1.0:0',
   releaseNotes: 'Added 2025 IRS Form 8949 and Schedule D support with fixed field mapping',
   license: 'mit',
-  wrapperRepo: 'https://github.com/BitcoinTX-org/BTCTX-StartOS',
+  wrapperRepo: 'https://github.com/PlebRick/BTCTX-StartOS',
   upstreamRepo: 'https://github.com/BitcoinTX-org/BTCTX',
   supportSite: 'https://github.com/BitcoinTX-org/BTCTX/issues',
   marketingSite: 'https://github.com/BitcoinTX-org/BTCTX',
@@ -28,7 +28,7 @@ export const manifest = setupManifest({
       source: {
         dockerTag: 'b1ackswan/btctx:latest',
       },
-      arch: ['aarch64'],
+      arch: ['aarch64', 'x86_64'],
     },
   },
   alerts: {
@@ -42,6 +42,6 @@ export const manifest = setupManifest({
   },
   dependencies: {},
   hardwareRequirements: {
-    arch: ['aarch64'],
+    arch: ['aarch64', 'x86_64'],
   },
 })
