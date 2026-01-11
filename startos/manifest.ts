@@ -6,11 +6,11 @@ import { setupManifest } from '@start9labs/start-sdk'
 export const manifest = setupManifest({
   id: 'btctx',
   title: 'BitcoinTX',
-  version: '0.3.1:0',
+  version: '0.3.2:0',
   satisfies: [],
-  canMigrateTo: '>=0.3.1:0',
+  canMigrateTo: '>=0.3.2:0',
   canMigrateFrom: '>=0.1.0:0',
-  releaseNotes: 'Fixed backup/restore for Docker compatibility, improved temp file handling',
+  releaseNotes: 'Fixed backup restore redirect - now properly clears session and redirects to login',
   license: 'mit',
   wrapperRepo: 'https://github.com/PlebRick/BTCTX-StartOS',
   upstreamRepo: 'https://github.com/BitcoinTX-org/BTCTX',
@@ -26,7 +26,7 @@ export const manifest = setupManifest({
   images: {
     main: {
       source: {
-        dockerTag: 'b1ackswan/btctx:v0.3.1',
+        dockerTag: 'b1ackswan/btctx:v0.3.2',
       },
       arch: ['aarch64', 'x86_64'],
     },
