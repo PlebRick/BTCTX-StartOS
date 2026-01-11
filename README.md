@@ -5,7 +5,7 @@ This repository contains the StartOS wrapper for [BitcoinTX](https://github.com/
 ## Requirements
 
 - StartOS 0.4.0 or later
-- ARM64 (aarch64) architecture
+- ARM64 (aarch64) or x86_64 architecture
 
 ## Building from Source
 
