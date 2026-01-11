@@ -49,12 +49,24 @@ startos/
 ## Key Configuration
 
 - **Docker image:** `b1ackswan/btctx:latest` (pulled from Docker Hub)
-- **Architecture:** aarch64 only
+- **Architecture:** aarch64, x86_64
 - **Port:** 80 (HTTP)
 - **Database path:** `/data/btctx.db`
 - **Volume mount:** `/data`
 - **Start command:** `uvicorn backend.main:app --host 0.0.0.0 --port 80`
 - **Default credentials:** admin / password
+
+## Common Workflows
+
+### "Docker image updated"
+
+When the user indicates the upstream Docker image has been updated, this typically means:
+1. Bump the wrapper version to match the upstream release
+2. Update release notes in the manifest
+3. Create a new version migration file
+4. Build and package the new .s9pk
+
+Follow the version bumping checklist below.
 
 ## Version Bumping Checklist
 
