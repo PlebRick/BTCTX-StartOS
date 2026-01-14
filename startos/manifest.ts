@@ -17,7 +17,7 @@ export const manifest = setupManifest({
   supportSite: 'https://github.com/BitcoinTX-org/BTCTX/issues',
   marketingSite: 'https://github.com/BitcoinTX-org/BTCTX',
   donationUrl: null,
-  docsUrl: 'https://github.com/BitcoinTX-org/BTCTX#readme',
+  docsUrl: 'https://github.com/PlebRick/BTCTX-StartOS#readme',
   description: {
     short: 'Self-hosted Bitcoin portfolio tracker with tax reporting',
     long: 'BitcoinTX is a local-first solution that tracks Bitcoin transactions using robust double-entry accounting and FIFO cost-basis to generate IRS-compliant tax reports including Form 8949 and Schedule D.',
