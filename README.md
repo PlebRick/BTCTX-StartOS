@@ -71,4 +71,5 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 - [BitcoinTX Repository](https://github.com/BitcoinTX-org/BTCTX)
 - [StartOS Documentation](https://docs.start9.com)
+- [StartOS 0.4.0 Packaging Guide](https://staging.docs.start9.com/packaging-guide/index.html)
 - [Start9 Labs](https://start9.com)

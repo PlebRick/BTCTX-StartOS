@@ -85,3 +85,8 @@ When updating for a new upstream release:
 The upstream app uses `/data/btctx.db`. This is configured in:
 - `startos/procedures/main.ts` (DATABASE_FILE env var)
 - `startos/procedures/actions/resetCredentials.ts` (sqlite3 connection)
+
+## Resources
+
+- [StartOS 0.4.0 Packaging Guide](https://staging.docs.start9.com/packaging-guide/index.html) - Official documentation for building StartOS packages
+- [Vaultwarden StartOS Wrapper](https://github.com/Start9Labs/vaultwarden-startos/tree/update/040) - Reference implementation (use `update/040` branch, not master)
