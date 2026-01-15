@@ -13,9 +13,9 @@ export const manifest = setupManifest({
   releaseNotes: 'CSV import support, CSV export option alongside encrypted backups, UI improvements',
   license: 'mit',
   wrapperRepo: 'https://github.com/PlebRick/BTCTX-StartOS',
-  upstreamRepo: 'https://github.com/BitcoinTX-org/BTCTX',
-  supportSite: 'https://github.com/BitcoinTX-org/BTCTX/issues',
-  marketingSite: 'https://github.com/BitcoinTX-org/BTCTX',
+  upstreamRepo: 'https://github.com/BitcoinTX-org/BTCTX-org',
+  supportSite: 'https://github.com/BitcoinTX-org/BTCTX-org/issues',
+  marketingSite: 'https://github.com/BitcoinTX-org/BTCTX-org',
   donationUrl: null,
   docsUrl: 'https://github.com/PlebRick/BTCTX-StartOS#readme',
   description: {

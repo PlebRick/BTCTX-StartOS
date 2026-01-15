@@ -51,7 +51,7 @@ BitcoinTX data is included in StartOS backups. Regular backups are recommended t
 ## Support
 
 For issues with the BitcoinTX application, visit:
-https://github.com/BitcoinTX-org/BTCTX/issues
+https://github.com/BitcoinTX-org/BTCTX-org/issues
 
 For issues with the StartOS wrapper, visit:
-https://github.com/BitcoinTX-org/BTCTX-StartOS/issues
+https://github.com/PlebRick/BTCTX-StartOS/issues
