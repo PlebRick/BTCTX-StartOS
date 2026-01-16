@@ -71,17 +71,32 @@ When the user indicates the upstream Docker image has been updated, this typical
 
 Follow the version bumping checklist below.
 
+## Version Format
+
+StartOS 0.4.0 uses Extended Version format: `upstream_version:wrapper_revision`
+
+Example: `0.5.1:0`
+- **`0.5.1`** - Upstream BTCTX app version
+- **`:0`** - Wrapper revision (first packaging of this version)
+
+**When to increment what:**
+- Bump **upstream version** (`0.5.1` → `0.5.2`) when the Docker image/app changes
+- Bump **wrapper revision** (`:0` → `:1`) when only wrapper code changes but upstream app is the same
+
+**Important:** Always bump some part of the version for each release. Same-version sideloads trigger "reinstall" instead of "update", which may not preserve user data.
+
 ## Version Bumping Checklist
 
 When updating for a new upstream release:
 
-1. Update `version` in `startos/manifest.ts`
-2. Update `canMigrateTo` in manifest if needed
-3. Update `releaseNotes` in manifest
-4. Create new version file in `startos/procedures/versions/v*_*_*_*.ts`
-5. Update `startos/procedures/versions/index.ts` to set new version as current
-6. Run `npm run check` to verify TypeScript
-7. Build with `make`
+1. Pull latest Docker image: `docker pull b1ackswan/btctx:latest`
+2. Update `version` in `startos/manifest.ts`
+3. Update `canMigrateTo` in manifest if needed
+4. Update `releaseNotes` in manifest
+5. Create new version file in `startos/procedures/versions/v*_*_*_*.ts`
+6. Update `startos/procedures/versions/index.ts` to set new version as current
+7. Run `npm run check` to verify TypeScript
+8. Build with `make`
 
 ## Database Path
 
