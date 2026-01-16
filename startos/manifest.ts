@@ -6,9 +6,9 @@ import { setupManifest } from '@start9labs/start-sdk'
 export const manifest = setupManifest({
   id: 'btctx',
   title: 'BitcoinTX',
-  version: '0.5.1:0',
+  version: '0.5.1:1-beta',
   satisfies: [],
-  canMigrateTo: '>=0.5.1:0',
+  canMigrateTo: '>=0.5.1:1-beta',
   canMigrateFrom: '>=0.1.0:0',
   releaseNotes: 'UI updates and bug fixes',
   license: 'mit',
