@@ -104,6 +104,31 @@ The upstream app uses `/data/btctx.db`. This is configured in:
 - `startos/procedures/main.ts` (DATABASE_FILE env var)
 - `startos/procedures/actions/resetCredentials.ts` (sqlite3 connection)
 
+## Git Remotes & Releases
+
+This repo is pushed to two remotes:
+- **origin** → `https://github.com/PlebRick/BTCTX-StartOS.git`
+- **org** → `https://github.com/BitcoinTX-org/BTCTX-StartOS.git`
+
+When pushing changes or creating releases, always sync both:
+
+```bash
+# Push commits to both remotes
+git push origin master
+git push org master
+
+# Push tags to both remotes
+git push origin --tags
+git push org --tags
+```
+
+When creating a GitHub release, create it on both repos with the same title, notes, and `btctx.s9pk` asset:
+
+```bash
+gh release create <tag> --repo PlebRick/BTCTX-StartOS --title "<title>" --notes "<notes>" ./btctx.s9pk
+gh release create <tag> --repo BitcoinTX-org/BTCTX-StartOS --title "<title>" --notes "<notes>" ./btctx.s9pk
+```
+
 ## Resources
 
 - [StartOS 0.4.0 Packaging Guide](https://staging.docs.start9.com/packaging-guide/index.html) - Official documentation for building StartOS packages
