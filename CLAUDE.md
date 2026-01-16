@@ -61,10 +61,13 @@ startos/
 ### "Docker image updated"
 
 When the user indicates the upstream Docker image has been updated, this typically means:
-1. Bump the wrapper version to match the upstream release
-2. Update release notes in the manifest
-3. Create a new version migration file
-4. Build and package the new .s9pk
+1. **Pull the latest Docker image first:** `docker pull b1ackswan/btctx:latest`
+2. Bump the wrapper version to match the upstream release
+3. Update release notes in the manifest
+4. Create a new version migration file
+5. Build and package the new .s9pk
+
+**Important:** The Makefile does NOT automatically pull the latest Docker image. You must run `docker pull b1ackswan/btctx:latest` before building to ensure the s9pk contains the updated image.
 
 Follow the version bumping checklist below.
 
