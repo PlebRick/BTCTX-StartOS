@@ -1,4 +1,6 @@
 import { sdk } from '../sdk'
+import { wrapperStore } from '../fileModels/wrapperStore'
+import { generateAdminPassword, setAdminCredentials } from '../utils'
 
 export const resetCredentials = sdk.Action.withoutInput(
   // id
@@ -8,49 +10,21 @@ export const resetCredentials = sdk.Action.withoutInput(
   async () => ({
     name: 'Reset Login Credentials',
     description:
-      'Reset the username and password back to the defaults (admin/password). Use this if you are locked out of your account.',
+      'Reset the username to "admin" and generate a new random password. Use this if you are locked out of your account.',
     warning:
-      'This will reset your login credentials to the default values. Anyone with access to your server will be able to log in until you change the password.',
-    allowedStatuses: 'any',
+      'This will replace your current login credentials. The new password will be displayed once and can be viewed again with the Show Credentials action.',
+    allowedStatuses: 'only-stopped',
     group: null,
     visibility: 'enabled',
   }),
 
   // the execution function
   async ({ effects }) => {
-    const mounts = sdk.Mounts.of().mountVolume({
-      volumeId: 'main',
-      subpath: null,
-      mountpoint: '/data',
-      readonly: false,
-    })
+    const password = generateAdminPassword()
 
     try {
-      await sdk.SubContainer.withTemp(
-        effects,
-        { imageId: 'main' },
-        mounts,
-        'reset-creds',
-        async (subc) => {
-          await subc.execFail([
-            'python',
-            '-c',
-            `
-import bcrypt
-import sqlite3
-
-default_hash = bcrypt.hashpw(b"password", bcrypt.gensalt()).decode("utf-8")
-
-conn = sqlite3.connect("/data/btctx.db")
-cursor = conn.cursor()
-cursor.execute("UPDATE users SET username = 'admin', password_hash = ? WHERE id = 1", (default_hash,))
-conn.commit()
-conn.close()
-print("Credentials reset successfully")
-`,
-          ])
-        },
-      )
+      await wrapperStore.write(effects, { adminPassword: password })
+      await setAdminCredentials(effects, password)
     } catch (error) {
       return {
         version: '1',
@@ -64,7 +38,7 @@ print("Credentials reset successfully")
       version: '1',
       title: 'Credentials Reset',
       message:
-        'Your login credentials have been reset to the defaults. Please log in and change your password immediately.',
+        'Your login credentials have been reset. Use the credentials below to log in.',
       result: {
         type: 'group',
         value: [
@@ -81,7 +55,7 @@ print("Credentials reset successfully")
             type: 'single',
             name: 'Password',
             description: null,
-            value: 'password',
+            value: password,
             copyable: true,
             masked: true,
             qr: false,

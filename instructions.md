@@ -4,12 +4,11 @@
 
 After installation, click the "Launch UI" button to open the BitcoinTX web interface.
 
-## Default Login
+## Logging In
 
-- **Username:** `admin`
-- **Password:** `password`
+A unique admin password is generated when the service is installed. To retrieve your credentials, run the **Show Credentials** action from the service's Actions menu.
 
-**Important:** Change your password after your first login for security.
+If you are ever locked out, stop the service and run the **Reset Login Credentials** action to generate a new password.
 
 ## Features
 

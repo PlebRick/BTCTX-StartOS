@@ -55,7 +55,7 @@ startos/
 - **Database path:** `/data/btctx.db`
 - **Volume mount:** `/data`
 - **Start command:** `uvicorn backend.main:app --host 0.0.0.0 --port 80`
-- **Default credentials:** admin / password
+- **Credentials:** username `admin`; a unique password is generated on install (stored in `/.startos-wrapper.json` on the `main` volume, retrievable via the Show Credentials action). Installs predating v0.6.0:1 may still use the upstream default `admin` / `password`.
 
 ## Common Workflows
 

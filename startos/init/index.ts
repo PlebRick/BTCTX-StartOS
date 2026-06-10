@@ -4,15 +4,16 @@ import { setInterfaces } from '../interfaces'
 import { versions } from '../versions'
 import { restoreInit } from '../backups'
 import { actions } from '../actions'
+import { firstBoot } from './firstBoot'
 
 /**
- * Plumbing. DO NOT EDIT.
- *
  * This sets up what happens when the service initializes and uninitializes.
+ * Scripts run in the order they are listed.
  */
 export const init = sdk.setupInit(
   restoreInit,
   versions,
+  firstBoot,
   setDependencies,
   setInterfaces,
   actions,

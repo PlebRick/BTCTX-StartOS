@@ -1,10 +1,10 @@
 import { sdk } from '../sdk'
 import { resetCredentials } from './resetCredentials'
-import { showDefaultCredentials } from './showDefaultCredentials'
+import { showCredentials } from './showCredentials'
 
 /**
  * Here we list every Action.
  */
 export const actions = sdk.Actions.of()
-  .addAction(showDefaultCredentials)
+  .addAction(showCredentials)
   .addAction(resetCredentials)

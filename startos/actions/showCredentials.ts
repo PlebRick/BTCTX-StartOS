@@ -1,14 +1,15 @@
 import { sdk } from '../sdk'
+import { wrapperStore } from '../fileModels/wrapperStore'
 
-export const showDefaultCredentials = sdk.Action.withoutInput(
+export const showCredentials = sdk.Action.withoutInput(
   // id
-  'show-default-credentials',
+  'show-credentials',
 
   // metadata
   async () => ({
-    name: 'Show Default Credentials',
+    name: 'Show Credentials',
     description:
-      'Display the default username and password for logging into BitcoinTX.',
+      'Display the username and password for logging into BitcoinTX.',
     warning: null,
     allowedStatuses: 'any',
     group: null,
@@ -16,12 +17,16 @@ export const showDefaultCredentials = sdk.Action.withoutInput(
   }),
 
   // the execution function
-  async () => {
+  async ({ effects }) => {
+    const stored = await wrapperStore.read().once()
+    const password = stored?.adminPassword
+
     return {
       version: '1',
-      title: 'Default Login Credentials',
-      message:
-        'Use these credentials to log in to BitcoinTX for the first time. You should change your password after logging in.',
+      title: 'Login Credentials',
+      message: password
+        ? 'Use these credentials to log in to BitcoinTX.'
+        : 'This install predates generated credentials, so the upstream defaults are shown. If you have changed your password in the app, use that instead. You should change the default password after logging in.',
       result: {
         type: 'group',
         value: [
@@ -38,7 +43,7 @@ export const showDefaultCredentials = sdk.Action.withoutInput(
             type: 'single',
             name: 'Password',
             description: null,
-            value: 'password',
+            value: password ?? 'password',
             copyable: true,
             masked: true,
             qr: false,

@@ -26,7 +26,7 @@ export const manifest = setupManifest({
   },
   alerts: {
     install:
-      'Default login credentials: Username "admin", Password "password". Please change your password after first login.',
+      'A unique admin password is generated for this install. Run the "Show Credentials" action to retrieve your login credentials.',
     update: null,
     uninstall: null,
     restore: null,
