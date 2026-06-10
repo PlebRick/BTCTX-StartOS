@@ -6,18 +6,11 @@ import { setupManifest } from '@start9labs/start-sdk'
 export const manifest = setupManifest({
   id: 'btctx',
   title: 'BitcoinTX',
-  version: '0.5.5:0-beta',
-  satisfies: [],
-  canMigrateTo: '>=0.5.5:0-beta',
-  canMigrateFrom: '>=0.1.0:0',
-  releaseNotes: 'Upstream update to 0.5.5',
   license: 'mit',
-  wrapperRepo: 'https://github.com/PlebRick/BTCTX-StartOS',
+  packageRepo: 'https://github.com/PlebRick/BTCTX-StartOS',
   upstreamRepo: 'https://github.com/BitcoinTX-org/BTCTX-org',
-  supportSite: 'https://github.com/BitcoinTX-org/BTCTX-org/issues',
-  marketingSite: 'https://github.com/BitcoinTX-org/BTCTX-org',
+  marketingUrl: 'https://github.com/BitcoinTX-org/BTCTX-org',
   donationUrl: null,
-  docsUrl: 'https://github.com/PlebRick/BTCTX-StartOS#readme',
   description: {
     short: 'Self-hosted Bitcoin portfolio tracker with tax reporting',
     long: 'BitcoinTX is a local-first solution that tracks Bitcoin transactions using robust double-entry accounting and FIFO cost-basis to generate IRS-compliant tax reports including Form 8949 and Schedule D.',
@@ -41,7 +34,5 @@ export const manifest = setupManifest({
     stop: null,
   },
   dependencies: {},
-  hardwareRequirements: {
-    arch: ['aarch64', 'x86_64'],
-  },
+  hardwareRequirements: {},
 })
