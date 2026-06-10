@@ -11,14 +11,16 @@ import { v0_5_3_0 } from './v0_5_3_0'
 import { v0_5_4_0 } from './v0_5_4_0'
 import { v0_5_5_0 } from './v0_5_5_0'
 import { v0_6_0_0 } from './v0_6_0_0'
+import { v0_6_0_1 } from './v0_6_0_1'
 
 /**
  * Here we list every version in sequential order.
  * The current version must be the FIRST argument.
  */
 export const versions = VersionGraph.of({
-  current: v0_6_0_0,
+  current: v0_6_0_1,
   other: [
+    v0_6_0_0,
     v0_5_5_0,
     v0_5_4_0,
     v0_5_3_0,

@@ -1,4 +1,4 @@
-PACKAGE_ID := $(shell grep -o "id: '[^']*'" startos/manifest.ts | sed "s/id: '\([^']*\)'/\1/")
+PACKAGE_ID := $(shell grep -o "id: '[^']*'" startos/manifest/index.ts | sed "s/id: '\([^']*\)'/\1/")
 INGREDIENTS := $(shell start-cli s9pk list-ingredients 2> /dev/null)
 
 .PHONY: all clean install check-deps check-init ingredients
