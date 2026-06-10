@@ -31,7 +31,14 @@ export const main = sdk.setupMain(async ({ effects }) => {
   return sdk.Daemons.of(effects).addDaemon('webui', {
     subcontainer,
     exec: {
-      command: ['uvicorn', 'backend.main:app', '--host', '0.0.0.0', '--port', '80'],
+      command: [
+        'uvicorn',
+        'backend.main:app',
+        '--host',
+        '0.0.0.0',
+        '--port',
+        '80',
+      ],
       env: {
         DATABASE_FILE: '/data/btctx.db',
       },

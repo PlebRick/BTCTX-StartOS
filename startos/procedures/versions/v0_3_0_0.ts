@@ -5,7 +5,8 @@ import { VersionInfo } from '@start9labs/start-sdk'
  */
 export const v0_3_0_0 = VersionInfo.of({
   version: '0.3.0:0',
-  releaseNotes: 'Added 2025 IRS Form 8949 and Schedule D support with fixed field mapping',
+  releaseNotes:
+    'Added 2025 IRS Form 8949 and Schedule D support with fixed field mapping',
   migrations: {
     up: async ({ effects }) => {
       // No data migration needed - internal feature update only

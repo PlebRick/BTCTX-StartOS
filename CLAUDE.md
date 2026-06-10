@@ -62,10 +62,9 @@ startos/
 
 When the user indicates the upstream Docker image has been updated, this typically means:
 1. **Pull the latest Docker image first:** `docker pull b1ackswan/btctx:latest`
-2. Bump the wrapper version to match the upstream release
-3. Update release notes in the manifest
-4. Create a new version migration file
-5. Build and package the new .s9pk
+2. Create a new version migration file with the bumped version and release notes
+3. Set it as current in `startos/procedures/versions/index.ts`
+4. Build and package the new .s9pk
 
 **Important:** The Makefile does NOT automatically pull the latest Docker image. You must run `docker pull b1ackswan/btctx:latest` before building to ensure the s9pk contains the updated image.
 
@@ -90,13 +89,14 @@ Example: `0.5.1:0`
 When updating for a new upstream release:
 
 1. Pull latest Docker image: `docker pull b1ackswan/btctx:latest`
-2. Update `version` in `startos/manifest.ts`
-3. Update `canMigrateTo` in manifest if needed
-4. Update `releaseNotes` in manifest
-5. Create new version file in `startos/procedures/versions/v*_*_*_*.ts`
-6. Update `startos/procedures/versions/index.ts` to set new version as current
-7. Run `npm run check` to verify TypeScript
-8. Build with `make`
+2. Create new version file in `startos/procedures/versions/v*_*_*_*.ts` with the new `version` and `releaseNotes`
+3. Update `startos/procedures/versions/index.ts` to set new version as current (previous current moves to `other`)
+4. Run `npm run check` to verify TypeScript
+5. Build with `make`
+
+Note: Since start-sdk 1.x, the version, release notes, and migration ranges
+(`canMigrateTo`/`canMigrateFrom`) are derived from the versions graph — they
+no longer exist in `startos/manifest.ts`.
 
 ## Database Path
 

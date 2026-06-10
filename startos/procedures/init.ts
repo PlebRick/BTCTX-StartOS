@@ -10,6 +10,12 @@ import { actions } from './actions'
  *
  * This sets up what happens when the service initializes and uninitializes.
  */
-export const init = sdk.setupInit(restoreInit, versions, setDependencies, setInterfaces, actions)
+export const init = sdk.setupInit(
+  restoreInit,
+  versions,
+  setDependencies,
+  setInterfaces,
+  actions,
+)
 
 export const uninit = sdk.setupUninit(versions)

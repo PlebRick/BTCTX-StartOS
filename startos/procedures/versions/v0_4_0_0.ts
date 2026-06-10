@@ -5,7 +5,8 @@ import { VersionInfo } from '@start9labs/start-sdk'
  */
 export const v0_4_0_0 = VersionInfo.of({
   version: '0.4.0:0',
-  releaseNotes: 'CSV import support, CSV export option alongside encrypted backups, UI improvements',
+  releaseNotes:
+    'CSV import support, CSV export option alongside encrypted backups, UI improvements',
   migrations: {
     up: async ({ effects }) => {
       // No data migration needed - feature release
