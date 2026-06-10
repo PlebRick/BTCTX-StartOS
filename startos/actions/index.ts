@@ -1,4 +1,4 @@
-import { sdk } from '../../sdk'
+import { sdk } from '../sdk'
 import { resetCredentials } from './resetCredentials'
 import { showDefaultCredentials } from './showDefaultCredentials'
 

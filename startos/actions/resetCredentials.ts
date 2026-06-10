@@ -1,4 +1,4 @@
-import { sdk } from '../../sdk'
+import { sdk } from '../sdk'
 
 export const resetCredentials = sdk.Action.withoutInput(
   // id

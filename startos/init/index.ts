@@ -1,9 +1,9 @@
 import { sdk } from '../sdk'
-import { setDependencies } from './dependencies/dependencies'
-import { setInterfaces } from './interfaces'
-import { versions } from './versions'
-import { restoreInit } from './backups'
-import { actions } from './actions'
+import { setDependencies } from '../dependencies'
+import { setInterfaces } from '../interfaces'
+import { versions } from '../versions'
+import { restoreInit } from '../backups'
+import { actions } from '../actions'
 
 /**
  * Plumbing. DO NOT EDIT.

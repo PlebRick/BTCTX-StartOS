@@ -1,5 +1,5 @@
 import { buildManifest } from '@start9labs/start-sdk'
-import { manifest as sdkManifest } from '../manifest'
+import { manifest as sdkManifest } from './manifest'
 import { versions } from './versions'
 
 /**

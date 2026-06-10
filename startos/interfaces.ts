@@ -1,4 +1,4 @@
-import { sdk } from '../sdk'
+import { sdk } from './sdk'
 
 export const uiPort = 80
 export const webUiInterfaceId = 'webui'

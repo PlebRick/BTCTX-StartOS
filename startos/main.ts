@@ -1,4 +1,4 @@
-import { sdk } from '../sdk'
+import { sdk } from './sdk'
 import { uiPort } from './interfaces'
 
 export const main = sdk.setupMain(async ({ effects }) => {

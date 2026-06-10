@@ -26,24 +26,25 @@ make clean
 
 ```
 startos/
-├── manifest.ts          # Package metadata, version, Docker image reference
+├── index.ts             # Main exports (manifest built via buildManifest)
 ├── sdk.ts               # SDK initialization
-├── store.ts             # Persistent store type (currently empty)
+├── main.ts              # Daemon setup (uvicorn command, env vars)
+├── interfaces.ts        # Network interface setup (port 80)
+├── backups.ts           # Backup configuration
+├── dependencies.ts      # Service dependencies (none)
 ├── utils.ts             # Shared utilities
-└── procedures/
-    ├── index.ts         # Main exports
-    ├── main.ts          # Daemon setup (uvicorn command, env vars)
-    ├── init.ts          # Initialization plumbing
-    ├── interfaces.ts    # Network interface setup (port 80)
-    ├── backups.ts       # Backup configuration
-    ├── actions/         # User-facing actions
-    │   ├── index.ts
-    │   ├── showDefaultCredentials.ts
-    │   └── resetCredentials.ts
-    ├── dependencies/    # Service dependencies (none)
-    └── versions/        # Version migration files
-        ├── index.ts     # Version graph
-        └── v*.ts        # Individual version migrations
+├── manifest/
+│   └── index.ts         # Package metadata, Docker image reference
+├── init/
+│   └── index.ts         # Initialization plumbing
+├── actions/             # User-facing actions
+│   ├── index.ts
+│   ├── showDefaultCredentials.ts
+│   └── resetCredentials.ts
+├── fileModels/          # Wrapper-managed files on the data volume
+└── versions/            # Version migration files
+    ├── index.ts         # Version graph
+    └── v*.ts            # Individual version migrations
 ```
 
 ## Key Configuration
@@ -89,8 +90,8 @@ Example: `0.5.1:0`
 When updating for a new upstream release:
 
 1. Update the pinned `dockerTag` in the manifest and pull it: `docker pull b1ackswan/btctx:vX.Y.Z`
-2. Create new version file in `startos/procedures/versions/v*_*_*_*.ts` with the new `version` and `releaseNotes`
-3. Update `startos/procedures/versions/index.ts` to set new version as current (previous current moves to `other`)
+2. Create new version file in `startos/versions/v*_*_*_*.ts` with the new `version` and `releaseNotes`
+3. Update `startos/versions/index.ts` to set new version as current (previous current moves to `other`)
 4. Run `npm run check` to verify TypeScript
 5. Build with `make`
 
@@ -101,8 +102,8 @@ no longer exist in `startos/manifest.ts`.
 ## Database Path
 
 The upstream app uses `/data/btctx.db`. This is configured in:
-- `startos/procedures/main.ts` (DATABASE_FILE env var)
-- `startos/procedures/actions/resetCredentials.ts` (sqlite3 connection)
+- `startos/main.ts` (DATABASE_FILE env var)
+- `startos/actions/resetCredentials.ts` (sqlite3 connection)
 
 ## Git Remotes & Releases
 
