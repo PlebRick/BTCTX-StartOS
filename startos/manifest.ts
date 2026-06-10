@@ -19,7 +19,7 @@ export const manifest = setupManifest({
   images: {
     main: {
       source: {
-        dockerTag: 'b1ackswan/btctx:latest',
+        dockerTag: 'b1ackswan/btctx:v0.6.0',
       },
       arch: ['aarch64', 'x86_64'],
     },

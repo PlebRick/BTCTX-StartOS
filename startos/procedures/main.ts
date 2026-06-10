@@ -46,7 +46,7 @@ export const main = sdk.setupMain(async ({ effects }) => {
     ready: {
       display: 'Web Interface',
       fn: () =>
-        sdk.healthCheck.checkPortListening(effects, uiPort, {
+        sdk.healthCheck.checkWebUrl(effects, `http://localhost:${uiPort}`, {
           successMessage: 'BitcoinTX is ready',
           errorMessage: 'BitcoinTX is not responding',
         }),

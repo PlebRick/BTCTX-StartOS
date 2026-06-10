@@ -50,8 +50,10 @@ jobs:
 
       - name: Pull upstream image (all architectures)
         run: |
-          docker pull --platform linux/amd64 b1ackswan/btctx:latest
-          docker pull --platform linux/arm64 b1ackswan/btctx:latest
+          IMAGE=$(grep -rho "dockerTag: '[^']*'" startos | head -1 | cut -d"'" -f2)
+          echo "Pinned image: $IMAGE"
+          docker pull --platform linux/amd64 "$IMAGE"
+          docker pull --platform linux/arm64 "$IMAGE"
 
       - name: Build s9pk
         run: make

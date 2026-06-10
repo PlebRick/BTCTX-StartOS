@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci
+
+      - name: Check formatting
+        run: npx prettier --check startos
+
+      - name: Type check
+        run: npm run check
+
+      - name: Build bundle
+        run: npm run build
+
+      - name: Verify packaged manifest
+        run: |
+          node -e "
+            const m = require('./javascript/index.js').manifest
+            if (!m.version || !m.releaseNotes) throw new Error('manifest missing version metadata')
+            console.log('manifest ok:', m.id, m.version)
+          "

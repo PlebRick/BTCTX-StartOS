@@ -48,7 +48,7 @@ startos/
 
 ## Key Configuration
 
-- **Docker image:** `b1ackswan/btctx:latest` (pulled from Docker Hub)
+- **Docker image:** `b1ackswan/btctx:vX.Y.Z` (version tag pinned in `startos/manifest.ts`, pulled from Docker Hub)
 - **Architecture:** aarch64, x86_64
 - **Port:** 80 (HTTP)
 - **Database path:** `/data/btctx.db`
@@ -61,12 +61,12 @@ startos/
 ### "Docker image updated"
 
 When the user indicates the upstream Docker image has been updated, this typically means:
-1. **Pull the latest Docker image first:** `docker pull b1ackswan/btctx:latest`
+1. Update the pinned `dockerTag` in `startos/manifest.ts` to the new version tag (e.g. `b1ackswan/btctx:v0.7.0`)
 2. Create a new version migration file with the bumped version and release notes
-3. Set it as current in `startos/procedures/versions/index.ts`
+3. Set it as current in the versions index
 4. Build and package the new .s9pk
 
-**Important:** The Makefile does NOT automatically pull the latest Docker image. You must run `docker pull b1ackswan/btctx:latest` before building to ensure the s9pk contains the updated image.
+**Important:** The image is pinned to a version tag in the manifest, so builds are reproducible. When building locally, pull the pinned tag first (e.g. `docker pull b1ackswan/btctx:v0.6.0`). The release CI workflow reads the pinned tag from the manifest automatically.
 
 Follow the version bumping checklist below.
 
@@ -88,7 +88,7 @@ Example: `0.5.1:0`
 
 When updating for a new upstream release:
 
-1. Pull latest Docker image: `docker pull b1ackswan/btctx:latest`
+1. Update the pinned `dockerTag` in the manifest and pull it: `docker pull b1ackswan/btctx:vX.Y.Z`
 2. Create new version file in `startos/procedures/versions/v*_*_*_*.ts` with the new `version` and `releaseNotes`
 3. Update `startos/procedures/versions/index.ts` to set new version as current (previous current moves to `other`)
 4. Run `npm run check` to verify TypeScript
