@@ -5,8 +5,45 @@ import { sdk } from './sdk'
  * Here we define any constants or functions that are shared by multiple components throughout the package codebase.
  */
 
+/** The standard mount of the `main` volume at /data, shared by the daemon and credential scripts. */
+export function mainMounts() {
+  return sdk.Mounts.of().mountVolume({
+    volumeId: 'main',
+    subpath: null,
+    mountpoint: '/data',
+    readonly: false,
+  })
+}
+
 export function generateAdminPassword(): string {
   return utils.getDefaultString({ charset: 'a-z,A-Z,0-9', len: 22 })
+}
+
+/** The action result group displaying login credentials. */
+export function credentialsResult(password: string) {
+  return {
+    type: 'group' as const,
+    value: [
+      {
+        type: 'single' as const,
+        name: 'Username',
+        description: null,
+        value: 'admin',
+        copyable: true,
+        masked: false,
+        qr: false,
+      },
+      {
+        type: 'single' as const,
+        name: 'Password',
+        description: null,
+        value: password,
+        copyable: true,
+        masked: true,
+        qr: false,
+      },
+    ],
+  }
 }
 
 /**
@@ -37,17 +74,10 @@ export async function setAdminCredentials(
   effects: T.Effects,
   password: string,
 ): Promise<void> {
-  const mounts = sdk.Mounts.of().mountVolume({
-    volumeId: 'main',
-    subpath: null,
-    mountpoint: '/data',
-    readonly: false,
-  })
-
   await sdk.SubContainer.withTemp(
     effects,
     { imageId: 'main' },
-    mounts,
+    mainMounts(),
     'set-credentials',
     async (subc) => {
       await subc.execFail(['python', '-c', setCredentialsScript, password])

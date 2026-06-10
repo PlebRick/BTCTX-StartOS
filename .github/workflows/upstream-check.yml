@@ -45,7 +45,7 @@ jobs:
           LATEST: ${{ steps.compare.outputs.latest }}
         run: |
           TITLE="Upstream BitcoinTX $LATEST is available (wrapper pins $PINNED)"
-          EXISTING=$(gh issue list --state open --search "in:title \"Upstream BitcoinTX $LATEST\"" --json number --jq '.[0].number')
+          EXISTING=$(gh issue list --state open --search "in:title \"Upstream BitcoinTX $LATEST\"" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
             echo "Issue #$EXISTING already tracks $LATEST"
             exit 0

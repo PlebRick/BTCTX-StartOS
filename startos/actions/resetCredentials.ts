@@ -1,6 +1,10 @@
 import { sdk } from '../sdk'
 import { wrapperStore } from '../fileModels/wrapperStore'
-import { generateAdminPassword, setAdminCredentials } from '../utils'
+import {
+  credentialsResult,
+  generateAdminPassword,
+  setAdminCredentials,
+} from '../utils'
 
 export const resetCredentials = sdk.Action.withoutInput(
   // id
@@ -21,11 +25,16 @@ export const resetCredentials = sdk.Action.withoutInput(
   // the execution function
   async ({ effects }) => {
     const password = generateAdminPassword()
+    const previous = await wrapperStore.read().once()
 
     try {
       await wrapperStore.write(effects, { adminPassword: password })
       await setAdminCredentials(effects, password)
     } catch (error) {
+      // Keep the stored password consistent with the database
+      await wrapperStore
+        .write(effects, previous ?? {})
+        .catch((e) => console.error('Failed to restore wrapper store:', e))
       return {
         version: '1',
         title: 'Reset Failed',
@@ -39,29 +48,7 @@ export const resetCredentials = sdk.Action.withoutInput(
       title: 'Credentials Reset',
       message:
         'Your login credentials have been reset. Use the credentials below to log in.',
-      result: {
-        type: 'group',
-        value: [
-          {
-            type: 'single',
-            name: 'Username',
-            description: null,
-            value: 'admin',
-            copyable: true,
-            masked: false,
-            qr: false,
-          },
-          {
-            type: 'single',
-            name: 'Password',
-            description: null,
-            value: password,
-            copyable: true,
-            masked: true,
-            qr: false,
-          },
-        ],
-      },
+      result: credentialsResult(password),
     }
   },
 )

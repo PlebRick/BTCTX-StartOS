@@ -39,7 +39,7 @@ startos/
 │   └── index.ts         # Initialization plumbing
 ├── actions/             # User-facing actions
 │   ├── index.ts
-│   ├── showDefaultCredentials.ts
+│   ├── showCredentials.ts
 │   └── resetCredentials.ts
 ├── fileModels/          # Wrapper-managed files on the data volume
 └── versions/            # Version migration files
@@ -49,7 +49,7 @@ startos/
 
 ## Key Configuration
 
-- **Docker image:** `b1ackswan/btctx:vX.Y.Z` (version tag pinned in `startos/manifest.ts`, pulled from Docker Hub)
+- **Docker image:** `b1ackswan/btctx:vX.Y.Z` (version tag pinned in `startos/manifest/index.ts`, pulled from Docker Hub)
 - **Architecture:** aarch64, x86_64
 - **Port:** 80 (HTTP)
 - **Database path:** `/data/btctx.db`
@@ -62,7 +62,7 @@ startos/
 ### "Docker image updated"
 
 When the user indicates the upstream Docker image has been updated, this typically means:
-1. Update the pinned `dockerTag` in `startos/manifest.ts` to the new version tag (e.g. `b1ackswan/btctx:v0.7.0`)
+1. Update the pinned `dockerTag` in `startos/manifest/index.ts` to the new version tag (e.g. `b1ackswan/btctx:v0.7.0`)
 2. Create a new version migration file with the bumped version and release notes
 3. Set it as current in the versions index
 4. Build and package the new .s9pk
@@ -97,7 +97,7 @@ When updating for a new upstream release:
 
 Note: Since start-sdk 1.x, the version, release notes, and migration ranges
 (`canMigrateTo`/`canMigrateFrom`) are derived from the versions graph — they
-no longer exist in `startos/manifest.ts`.
+no longer exist in the manifest (`startos/manifest/index.ts`).
 
 ## Database Path
 

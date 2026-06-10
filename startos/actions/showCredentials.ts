@@ -1,5 +1,6 @@
 import { sdk } from '../sdk'
 import { wrapperStore } from '../fileModels/wrapperStore'
+import { credentialsResult } from '../utils'
 
 export const showCredentials = sdk.Action.withoutInput(
   // id
@@ -27,29 +28,7 @@ export const showCredentials = sdk.Action.withoutInput(
       message: password
         ? 'Use these credentials to log in to BitcoinTX.'
         : 'This install predates generated credentials, so the upstream defaults are shown. If you have changed your password in the app, use that instead. You should change the default password after logging in.',
-      result: {
-        type: 'group',
-        value: [
-          {
-            type: 'single',
-            name: 'Username',
-            description: null,
-            value: 'admin',
-            copyable: true,
-            masked: false,
-            qr: false,
-          },
-          {
-            type: 'single',
-            name: 'Password',
-            description: null,
-            value: password ?? 'password',
-            copyable: true,
-            masked: true,
-            qr: false,
-          },
-        ],
-      },
+      result: credentialsResult(password ?? 'password'),
     }
   },
 )

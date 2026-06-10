@@ -1,5 +1,6 @@
 import { sdk } from './sdk'
 import { uiPort } from './interfaces'
+import { mainMounts } from './utils'
 
 export const main = sdk.setupMain(async ({ effects }) => {
   /**
@@ -10,16 +11,10 @@ export const main = sdk.setupMain(async ({ effects }) => {
   /**
    * Create the subcontainer for BitcoinTX
    */
-  const mounts = sdk.Mounts.of().mountVolume({
-    volumeId: 'main',
-    subpath: null,
-    mountpoint: '/data',
-    readonly: false,
-  })
   const subcontainer = await sdk.SubContainer.of(
     effects,
     { imageId: 'main' },
-    mounts,
+    mainMounts(),
     'btctx',
   )
 
@@ -47,6 +42,7 @@ export const main = sdk.setupMain(async ({ effects }) => {
       display: 'Web Interface',
       fn: () =>
         sdk.healthCheck.checkWebUrl(effects, `http://localhost:${uiPort}`, {
+          timeout: 5000,
           successMessage: 'BitcoinTX is ready',
           errorMessage: 'BitcoinTX is not responding',
         }),
