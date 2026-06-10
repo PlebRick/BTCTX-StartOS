@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - 'v*'
+    branches:
+      - 'release/*'
   workflow_dispatch:
     inputs:
       tag:
@@ -58,7 +60,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          if [ -n "${{ github.event.inputs.tag }}" ]; then
+            TAG="${{ github.event.inputs.tag }}"
+          else
+            TAG="${GITHUB_REF_NAME#release/}"
+          fi
           VERSION=$(node -p "require('./javascript/index.js').manifest.version")
           NOTES=$(node -p "require('./javascript/index.js').manifest.releaseNotes")
           gh release create "$TAG" --target "$GITHUB_SHA" \
