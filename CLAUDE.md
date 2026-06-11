@@ -111,23 +111,36 @@ This repo is pushed to two remotes:
 - **origin** → `https://github.com/PlebRick/BTCTX-StartOS.git`
 - **org** → `https://github.com/BitcoinTX-org/BTCTX-StartOS.git`
 
-When pushing changes or creating releases, always sync both:
+When pushing changes, always sync both:
 
 ```bash
-# Push commits to both remotes
-git push origin master
-git push org master
-
-# Push tags to both remotes
-git push origin --tags
-git push org --tags
+# Push commits and tags to both remotes
+git push origin master --tags
+git push org master --tags
 ```
 
-When creating a GitHub release, create it on both repos with the same title, notes, and `btctx.s9pk` asset:
+**Releases are automated.** Pushing a `v*` tag triggers the Release workflow
+(`.github/workflows/release.yml`) on each repo, which builds the s9pk in CI
+and publishes a GitHub release with the `btctx.s9pk` asset. The release title
+and notes are derived from the current version in the versions graph. So to
+cut a release, just tag and push to both remotes:
 
 ```bash
-gh release create <tag> --repo PlebRick/BTCTX-StartOS --title "<title>" --notes "<notes>" ./btctx.s9pk
-gh release create <tag> --repo BitcoinTX-org/BTCTX-StartOS --title "<title>" --notes "<notes>" ./btctx.s9pk
+git tag v0.7.0
+git push origin master --tags
+git push org master --tags
+```
+
+Do NOT also run `gh release create` — the workflow does it, and a manually
+created release would collide with it. If a workflow run fails on one repo,
+re-run it (`gh run rerun <run-id> --repo <repo>`) or use the workflow's
+`workflow_dispatch` trigger with the tag as input.
+
+Verify afterwards that both releases exist with the asset attached:
+
+```bash
+gh release view <tag> --repo PlebRick/BTCTX-StartOS --json name,assets
+gh release view <tag> --repo BitcoinTX-org/BTCTX-StartOS --json name,assets
 ```
 
 ## Resources
