@@ -55,7 +55,7 @@ startos/
 - **Database path:** `/data/btctx.db`
 - **Volume mount:** `/data`
 - **Start command:** `uvicorn backend.main:app --host 0.0.0.0 --port 80`
-- **Credentials:** username `admin`; a unique password is generated on install (stored in `/.startos-wrapper.json` on the `main` volume, retrievable via the Show Credentials action). Installs predating v0.6.0:1 may still use the upstream default `admin` / `password`.
+- **Credentials:** username `admin`; a unique password is generated on install (stored in `/.startos-wrapper.json` on the `main` volume, retrievable via the Show Credentials action). This behavior is unchanged in v0.7.0:0. Installs predating v0.6.0:1 may still use the upstream default `admin` / `password`.
 
 ## Common Workflows
 
@@ -67,7 +67,7 @@ When the user indicates the upstream Docker image has been updated, this typical
 3. Set it as current in the versions index
 4. Build and package the new .s9pk
 
-**Important:** The image is pinned to a version tag in the manifest, so builds are reproducible. When building locally, pull the pinned tag first (e.g. `docker pull b1ackswan/btctx:v0.6.0`). The release CI workflow reads the pinned tag from the manifest automatically.
+**Important:** The image is pinned to a version tag in the manifest, so builds are reproducible. When building locally, pull the pinned tag first (e.g. `docker pull b1ackswan/btctx:v0.7.0`). The release CI workflow reads the pinned tag from the manifest automatically.
 
 Follow the version bumping checklist below.
 
